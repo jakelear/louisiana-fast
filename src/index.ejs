@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+    <h1 class="m-header">Louisiana. Fast.</h1>
+
+    <div class="l-main">
+
+      <section id="landing" class="m-section">
+        <p><span class="m-phrase" id="phrase-one">You're hungry.</span> <span class="m-phrase" id="phrase-two">Don't panic.</span></p>
+        <div class="spinner hidden" id="btn-loader"></div>
+
+        <div class="m-button__wrapper" id="btn-fader">
+          <button id="chicken-btn" class="button--moema">Fix it.</button>
+        </div>
+      </section>
+      <section id="loading" class="m-section hidden">
+        <div class="spinner"></div>
+      </section>
+      <section id="results" class="m-section m-section--results hidden">
+        <p id="results-phrase-one" class="m-phrase m-phrase--results align-right">You are here.</p>
+        <div id="map"></div>
+        <p id="results-phrase-two" class="m-phrase m-phrase--results">The nearest Popeyes is here.</p>
+      </section>
+      <section id="directions" class="m-section">
+        <p>Directions</p>
+        <ul id="directions-list">
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
