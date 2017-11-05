@@ -92,7 +92,7 @@ var LF = (function() {
   * - Hide the landing section, show the loading section
   * - Uses the mapbox geocoding api to search for nearby Popeyes locations
   * - Limited by proximity to the user's location
-  * - Once the saerch Promise resolves, use Turf to measure which returned location is closest
+  * - Once the search Promise resolves, use Turf to measure which returned location is closest
   * - Spawn a map showing the user's location
   * - Once the map loads, fire onMapLoaded()
   */
