@@ -53,7 +53,15 @@ function init() {
         showStartButton();
       })
       .catch(err => {
-        console.log(err.message);
+        alert(
+          'We were unable to grab your location. Check it out with a pre-set location.'
+        );
+        hideElement(buttonLoader);
+        locations.user = {};
+        locations.user.long = -77.034084;
+        locations.user.lat = 38.909671;
+        locations.user.coords = [-77.034084, 38.909671];
+        showStartButton();
       });
   }, 1200);
 
@@ -101,7 +109,7 @@ function start() {
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v9?optimize=true',
         center: locations.user.coords,
-        zoom: 14
+        zoom: 18
       });
 
       // create a HTML element for user and location markers
@@ -149,7 +157,7 @@ function start() {
   function flyToLocation(location) {
     map.flyTo({
       center: location.geometry.coordinates,
-      zoom: 12,
+      zoom: 15,
       speed: 0.6, // make the flying slow
       curve: 1 // change the speed at which it zooms out
     });
