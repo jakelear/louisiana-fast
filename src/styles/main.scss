@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Archivo+Black");
+@import url("https://fonts.googleapis.com/css?family=Archivo+Black|Open+Sans");
 html,
 body {
   height: 100%;
@@ -86,7 +86,6 @@ body {
 }
 
 .l-main {
-  align-items: center;
   color: #444;
   display: flex;
   font-size: 2.2rem;
@@ -102,25 +101,37 @@ body {
 .m-section {
   align-items: start;
   width: 100%;
-  align-self: start;
   text-align: center;
   &.hidden {
     display: none;
   }
 }
 
+.m-section--landing {
+  margin: 8rem 0 0;
+}
+
 .m-section--results {
   display: flex;
-  align-items: start;
   justify-content: center;
+  margin: 8rem 0 0;
+}
+
+.m-section--directions {
+  opacity: 0;
+  transition: opacity 2s linear;
 }
 
 .m-phrase--results {
+  color: #888;
   width: 30%;
   margin: 0 2rem;
   text-align: left;
   &.align-right {
     text-align: right;
+  }
+  span {
+    color: #333;
   }
 }
 
@@ -149,26 +160,15 @@ button {
 
 .m-phrase {
   opacity: 0;
+  transition: opacity 1s linear;
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in 1 forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  opacity: 1;
 }
 
 .fade-out {
-  animation: fadeOut 0.5s ease-in 1 forwards;
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-  }
+  opacity: 0;
 }
 
 /* Moema */
@@ -246,4 +246,42 @@ button {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
+}
+
+.m-directions {
+  border: 1px solid #f6f6f6;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.1rem;
+  list-style: none;
+  text-align: left;
+  text-transform: none;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0;
+
+  span {
+    display: inline-block;
+  }
+}
+
+.m-directions__header {
+  font-size: 1.4rem;
+  max-width: 400px;
+  margin: 2rem auto 1rem;
+  text-align: center;
+}
+
+.m-directions__item {
+  display: block;
+  position: relative;
+  padding: 1rem 3rem 1rem 1rem;
+  &:nth-child(odd) {
+    background: #f6f6f6;
+  }
+}
+
+.m-directions__distance {
+  color: #808080;
+  position: absolute;
+  right: 1rem;
 }

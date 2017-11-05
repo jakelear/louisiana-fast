@@ -155,25 +155,35 @@ function initDirections(destination) {
 }
 
 function renderDirections(data) {
+  const directionsSection = document.getElementById("directions");
   const directionsList = document.getElementById("directions-list");
+
+  // Convert the distance and time to miles and minutes
   let distance = metersToFixedMiles(data.routes[0].distance);
   let time = secondsToRoundedMinutes(data.routes[0].duration);
-  console.log(`${distance} miles away.`);
-  console.log(`${time} minutes away`);
+
+  // Build a header for the directions
+  let directionsHeader = document.createElement("div");
+  directionsHeader.className = "m-directions__header";
+  directionsHeader.innerHTML = `<p>You're ${distance} miles and about ${time} minutes away.</p><p>Hang in there.</p>`;
+
+  // Build the directions list
   let directions = data.routes[0].legs[0].steps;
   for (var i = 0, len = directions.length; i < len; i++) {
     let template = `
-      <li class="m-directions__item">
-        <span class="m-directions__instruction">${directions[i].maneuver
-          .instruction}</span>
-        <span class="m-directions__distance">${metersToFixedMiles(
-          directions[i].distance
-        )}</span>
-      </li>
+      <span class="m-directions__instruction">${directions[i].maneuver
+        .instruction}</span>
+      <span class="m-directions__distance">${metersToFixedMiles(
+        directions[i].distance
+      )} mi</span>
     `;
     let item = document.createElement("li");
+    item.className = "m-directions__item";
     item.innerHTML = template;
     directionsList.appendChild(item);
+    directionsSection.insertBefore(directionsHeader, directionsList);
+
+    directionsSection.classList.add("fade-in");
   }
 }
 

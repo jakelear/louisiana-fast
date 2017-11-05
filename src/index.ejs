@@ -8,7 +8,7 @@
 
     <div class="l-main">
 
-      <section id="landing" class="m-section">
+      <section id="landing" class="m-section m-section--landing">
         <p><span class="m-phrase" id="phrase-one">You're hungry.</span> <span class="m-phrase" id="phrase-two">Don't panic.</span></p>
         <div class="spinner hidden" id="btn-loader"></div>
 
@@ -20,13 +20,12 @@
         <div class="spinner"></div>
       </section>
       <section id="results" class="m-section m-section--results hidden">
-        <p id="results-phrase-one" class="m-phrase m-phrase--results align-right">You are here.</p>
+        <p id="results-phrase-one" class="m-phrase m-phrase--results align-right"><span>You</span> are here.</p>
         <div id="map"></div>
-        <p id="results-phrase-two" class="m-phrase m-phrase--results">The nearest Popeyes is here.</p>
+        <p id="results-phrase-two" class="m-phrase m-phrase--results">The nearest <span>Popeyes</span> is here.</p>
       </section>
-      <section id="directions" class="m-section">
-        <p>Directions</p>
-        <ul id="directions-list">
+      <section id="directions" class="m-section m-section--directions">
+        <ul id="directions-list" class="m-directions">
         </ul>
       </section>
     </div>
