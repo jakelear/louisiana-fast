@@ -58,6 +58,9 @@ body {
   width: 400px;
   border: 1px solid #eee;
   text-align: left;
+  @media (max-width: 850px) {
+    margin: 0 auto;
+  }
 }
 
 .marker {
@@ -83,6 +86,13 @@ body {
   width: 100%;
   top: -2rem;
   z-index: 0;
+  @media (max-width: 1575px) {
+    font-size: 6rem;
+    top: -1rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 4rem;
+  }
 }
 
 .l-main {
@@ -115,6 +125,9 @@ body {
   display: flex;
   justify-content: center;
   margin: 8rem 0 0;
+  @media (max-width: 850px) {
+    display: block;
+  }
 }
 
 .m-section--directions {
@@ -127,8 +140,16 @@ body {
   width: 30%;
   margin: 0 2rem;
   text-align: left;
+  @media (max-width: 850px) {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+  }
   &.align-right {
     text-align: right;
+    @media (max-width: 850px) {
+      text-align: center;
+    }
   }
   span {
     color: #333;
@@ -274,7 +295,7 @@ button {
 .m-directions__item {
   display: block;
   position: relative;
-  padding: 1rem 3rem 1rem 1rem;
+  padding: 1rem 5rem 1rem 1rem;
   &:nth-child(odd) {
     background: #f6f6f6;
   }
@@ -284,4 +305,5 @@ button {
   color: #808080;
   position: absolute;
   right: 1rem;
+  top: 1rem;
 }

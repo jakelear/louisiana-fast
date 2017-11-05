@@ -1,8 +1,9 @@
 import { get, showElement, hideElement } from "./utils";
+import mapboxKey from "./mapbox_key";
 import mapboxgl from "mapbox-gl";
 const turf = require("@turf/turf");
 
-mapboxgl.accessToken = "";
+mapboxgl.accessToken = mapboxKey();
 
 var locations = {};
 var map;
@@ -88,7 +89,7 @@ function start() {
       // Show the results section before appending the map
       // So mapbox can append properly sized canvas
       hideElement(loadingSection);
-      showElement(resultsSection, "flex");
+      resultsSection.classList.remove("hidden");
 
       map = new mapboxgl.Map({
         container: "map",
