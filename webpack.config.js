@@ -4,6 +4,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var DashboardPlugin = require("webpack-dashboard/plugin");
+var BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 var in_prod_env = process.env.NODE_ENV === "production";
 
@@ -59,6 +61,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.ejs"
     }),
+    new BundleAnalyzerPlugin(),
 
     new CleanWebpackPlugin(["dist"], {
       root: __dirname,

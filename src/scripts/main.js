@@ -1,7 +1,7 @@
 import { get, showElement, hideElement } from "./utils";
 import mapboxKey from "./mapbox_key";
 import mapboxgl from "mapbox-gl";
-const turf = require("@turf/turf");
+import turfDistance from "@turf/distance";
 
 mapboxgl.accessToken = mapboxKey();
 
@@ -200,7 +200,7 @@ function findNearest(userLocation, searchLocations) {
     // Add a distance property to each result
     // that contains the distance from the user browser location
     Object.defineProperty(result.properties, "distance", {
-      value: turf.distance(locations.user.coords, result.geometry, "miles"),
+      value: turfDistance(locations.user.coords, result.geometry, "miles"),
       writable: true,
       enumerable: true,
       configurable: true
