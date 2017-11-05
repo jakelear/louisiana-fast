@@ -11,5 +11,7 @@ A button with one purpose: find the nearest Popeyes Louisiana Kitchen, and get d
 1. Clone the repo
 2. `npm install`
 3. `npm run dev`
+4. App will run at [localhost:9000](http://localhost:9000) with livereload
+5. Webpack bundle analyzer will run at [localhost:8888](http://localhost:8888)
 
 
