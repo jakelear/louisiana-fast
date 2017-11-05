@@ -1,5 +1,5 @@
 # Louisiana-fast
-A button with one purpose: find the nearest Popeyes Louisiana Kitchen, and get direcitons to it.
+A button with one purpose: find the nearest Popeyes Louisiana Kitchen, and get directions to it.
 
 ## How does it work?
 1. Use browser geolocation to locate the user.
