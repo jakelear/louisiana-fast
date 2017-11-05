@@ -1,4 +1,10 @@
-import { get, showElement, hideElement } from "./utils";
+import {
+  get,
+  showElement,
+  hideElement,
+  metersToFixedMiles,
+  secondsToRoundedMinutes
+} from "./utils";
 import mapboxKey from "./mapbox_key";
 import mapboxgl from "mapbox-gl";
 import turfDistance from "@turf/distance";
@@ -222,14 +228,6 @@ function findNearest(userLocation, searchLocations) {
   // TODO: It might be the case that the closest by distance is not the fastest,
   // so it could be worthwhile to measure travel time on the N closest locations
   return searchLocations[0];
-}
-
-function metersToFixedMiles(m) {
-  return (m * 0.000621371192).toFixed(2);
-}
-
-function secondsToRoundedMinutes(s) {
-  return Math.round(s / 60);
 }
 
 init();

@@ -31,11 +31,21 @@ export function get(url) {
 
 // Hide Element
 export function hideElement(el) {
-  el.style.display = 'none';
+  el.style.display = "none";
 }
 
 // Show Element
 export function showElement(el, value) {
   el.style.display = value;
   el.style.visibility = "visible";
+}
+
+// Meters to miles, to two decimal points
+export function metersToFixedMiles(m) {
+  return (m * 0.000621371192).toFixed(2);
+}
+
+// Round seconds to nearest minute
+export function secondsToRoundedMinutes(s) {
+  return Math.round(s / 60);
 }
