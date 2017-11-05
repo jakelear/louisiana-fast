@@ -1,69 +1,69 @@
-var webpack = require("webpack");
-var path = require("path");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CleanWebpackPlugin = require("clean-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var DashboardPlugin = require("webpack-dashboard/plugin");
-var BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+var webpack = require('webpack');
+var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
-var in_prod_env = process.env.NODE_ENV === "production";
+var in_prod_env = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
     port: 9000
   },
 
   entry: {
-    main: ["./src/scripts/main.js", "./src/styles/main.scss"]
+    main: ['./src/scripts/main.js', './src/styles/main.scss']
   },
 
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "[name].js"
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name].js'
   },
 
   module: {
     rules: [
       {
         test: /\.glsl$/,
-        use: "raw-loader"
+        use: 'raw-loader'
       },
       {
         test: /\.ejs$/,
-        use: "ejs-loader"
+        use: 'ejs-loader'
       },
       {
         test: /\.s[ac]ss$/,
         use: ExtractTextPlugin.extract({
-          loader: ["css-loader", "sass-loader"],
-          fallback: "style-loader"
+          loader: ['css-loader', 'sass-loader'],
+          fallback: 'style-loader'
         })
       },
       {
         test: /\.(png|jpe?g|mp4|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "assets/[name].[ext]"
+          name: 'assets/[name].[ext]'
         }
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       }
     ]
   },
 
   plugins: [
-    new ExtractTextPlugin("[name].css"),
+    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
-      template: "src/index.ejs"
+      template: 'src/index.ejs'
     }),
     new BundleAnalyzerPlugin(),
 
-    new CleanWebpackPlugin(["dist"], {
+    new CleanWebpackPlugin(['dist'], {
       root: __dirname,
       verbose: true,
       dry: false
@@ -78,5 +78,13 @@ module.exports = {
 };
 
 if (in_prod_env) {
-  module.exports.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+        comparisons: false // don't optimize comparisons
+      }
+    })
+  );
 }

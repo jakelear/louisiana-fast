@@ -99,7 +99,7 @@ function start() {
 
       map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/light-v9',
+        style: 'mapbox://styles/mapbox/light-v9?optimize=true',
         center: locations.user.coords,
         zoom: 14
       });
@@ -112,26 +112,34 @@ function start() {
       locMarker.className = 'm-map__marker';
       locMarker.classList.add('red');
 
-      // make a marker for each feature and add to the map
-      new mapboxgl.Marker(userMarker)
-        .setLngLat(locations.user.coords)
-        .addTo(map);
-      new mapboxgl.Marker(locMarker)
-        .setLngLat(nearestLocation.geometry.coordinates)
-        .addTo(map);
+      map.on('load', e => {
+        if (map.loaded()) {
+          // make a marker for each feature and add to the map
+          new mapboxgl.Marker(userMarker)
+            .setLngLat(locations.user.coords)
+            .addTo(map);
+          new mapboxgl.Marker(locMarker)
+            .setLngLat(nearestLocation.geometry.coordinates)
+            .addTo(map);
 
-      let resultsPhraseOne = document.getElementById('results-phrase-one');
-      let resultsPhraseTwo = document.getElementById('results-phrase-two');
-      setTimeout(function() {
-        resultsPhraseOne.classList.add('fade-in');
-      }, 400);
-      setTimeout(function() {
-        resultsPhraseOne.classList.remove('fade-in');
-        resultsPhraseOne.classList.add('fade-out');
-        resultsPhraseTwo.classList.add('fade-in');
-        flyToLocation(nearestLocation);
-        initDirections(nearestLocation);
-      }, 2300);
+          let resultsPhraseOne = document.getElementById('results-phrase-one');
+          let resultsPhraseTwo = document.getElementById('results-phrase-two');
+
+          setTimeout(function() {
+            resultsPhraseOne.classList.add('fade-in');
+          }, 400);
+          setTimeout(function() {
+            resultsPhraseOne.classList.remove('fade-in');
+            resultsPhraseOne.classList.add('fade-out');
+            resultsPhraseTwo.classList.add('fade-in');
+            flyToLocation(nearestLocation);
+            initDirections(nearestLocation);
+          }, 2300);
+
+          // turn off sourcedata listener if its no longer needed
+          map.off('load');
+        }
+      });
     },
     function(error) {
       console.error('Failed!', error);
