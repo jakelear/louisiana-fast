@@ -98,7 +98,7 @@ body {
     font-size: 4rem;
   }
   @media (max-width: 400px) {
-    font-size: 3.5rem;
+    font-size: 3.3rem;
   }
 }
 
@@ -175,6 +175,7 @@ button {
   margin: 0 auto;
   outline: 0;
   position: relative;
+  padding: 0;
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
