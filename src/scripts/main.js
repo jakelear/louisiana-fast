@@ -29,12 +29,12 @@ var LF = (function() {
   function init() {
     const phraseOne = document.getElementById('phrase-one');
     const phraseTwo = document.getElementById('phrase-two');
-    const buttonLoader = document.getElementById('btn-loader');
+
     const button = document.getElementById('chicken-btn');
 
     button.addEventListener('click', function(event) {
       event.preventDefault();
-      startSearch();
+      fixIt();
     });
 
     // Fade in the landing text
@@ -43,37 +43,13 @@ var LF = (function() {
     }, 200);
     setTimeout(function() {
       phraseTwo.classList.add('fade-in');
-      showElement(buttonLoader, 'block');
     }, 700);
 
-    // As the text fade-in finishes, load the user location and show the start button
+    // As the text fade-in finishes, show the start button
     setTimeout(function() {
-      getUserLocation()
-        .then(position => {
-          hideElement(buttonLoader);
-          locations.user = {};
-          locations.user.long = position.coords.longitude;
-          locations.user.lat = position.coords.latitude;
-          locations.user.coords = [locations.user.long, locations.user.lat];
-          showStartButton();
-        })
-        .catch(err => {
-          alert(
-            'We were unable to grab your location. Check it out with a pre-set location.'
-          );
-          hideElement(buttonLoader);
-          locations.user = {};
-          locations.user.long = -77.034084;
-          locations.user.lat = 38.909671;
-          locations.user.coords = [-77.034084, 38.909671];
-          showStartButton();
-        });
-    }, 900);
-
-    function showStartButton() {
       const buttonFader = document.getElementById('btn-fader');
       buttonFader.classList.add('fade-in');
-    }
+    }, 1200);
   }
 
   /**
@@ -87,9 +63,41 @@ var LF = (function() {
   }
 
   /**
-  * startSearch
+  * fixIt
   * Runs when user presses the "Fix it" button
-  * - Hide the landing section, show the loading section
+  * - Hide the landing section
+  * - show the loader section
+  * - Get user location
+  * - once user location availabe, kick off startSearch
+  */
+  function fixIt() {
+    let landingSection = document.getElementById('landing');
+    let loadingSection = document.getElementById('loading');
+    hideElement(landingSection);
+    showElement(loadingSection, 'block');
+
+    getUserLocation()
+      .then(position => {
+        locations.user = {};
+        locations.user.long = position.coords.longitude;
+        locations.user.lat = position.coords.latitude;
+        locations.user.coords = [locations.user.long, locations.user.lat];
+        startSearch();
+      })
+      .catch(err => {
+        alert(
+          'We were unable to grab your location. Check it out with a pre-set location.'
+        );
+        locations.user = {};
+        locations.user.long = -77.034084;
+        locations.user.lat = 38.909671;
+        locations.user.coords = [-77.034084, 38.909671];
+        startSearch();
+      });
+  }
+
+  /**
+  * startSearch
   * - Uses the mapbox geocoding api to search for nearby Popeyes locations
   * - Limited by proximity to the user's location
   * - Once the search Promise resolves, use Turf to measure which returned location is closest
@@ -97,12 +105,8 @@ var LF = (function() {
   * - Once the map loads, fire onMapLoaded()
   */
   function startSearch() {
-    let landingSection = document.getElementById('landing');
-    let loadingSection = document.getElementById('loading');
     let resultsSection = document.getElementById('results');
-
-    hideElement(landingSection);
-    showElement(loadingSection, 'block');
+    let loadingSection = document.getElementById('loading');
 
     let rootGeocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
     let searchTerm = `Popeyes Louisiana Kitchen`;
@@ -112,6 +116,7 @@ var LF = (function() {
     // Fetch the nearby locations
     get(localGeocodingSearchUrl).then(
       function(response) {
+        hideElement(loadingSection);
         // Parse the response and store the features
         let nearbyLocations = JSON.parse(response).features;
         let nearestLocation = findNearest(
@@ -124,7 +129,6 @@ var LF = (function() {
 
         // Show the results section before appending the map
         // So mapbox can append properly sized canvas
-        hideElement(loadingSection);
         resultsSection.classList.remove('hidden');
 
         map = new mapboxgl.Map({
