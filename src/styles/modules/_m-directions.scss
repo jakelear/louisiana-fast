@@ -1,0 +1,40 @@
+$m: '.m-directions';
+
+#{$m} {
+  border: 1px solid #f6f6f6;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  list-style: none;
+  text-align: left;
+  text-transform: none;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0;
+
+  span {
+    display: inline-block;
+  }
+}
+
+#{$m}__header {
+  font-size: 1.4rem;
+  max-width: 400px;
+  margin: 2rem auto 1rem;
+  text-align: center;
+}
+
+#{$m}__item {
+  display: block;
+  position: relative;
+  padding: 1rem 5rem 1rem 1rem;
+  &:nth-child(odd) {
+    background: #f6f6f6;
+  }
+}
+
+#{$m}__distance {
+  color: #808080;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}

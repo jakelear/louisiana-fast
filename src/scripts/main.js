@@ -4,18 +4,18 @@ import {
   hideElement,
   metersToFixedMiles,
   secondsToRoundedMinutes
-} from "./utils";
-import mapboxKey from "./mapbox_key";
-import mapboxgl from "mapbox-gl";
-import turfDistance from "@turf/distance";
+} from './utils';
+import mapboxKey from './mapbox_key';
+import mapboxgl from 'mapbox-gl';
+import turfDistance from '@turf/distance';
 
 mapboxgl.accessToken = mapboxKey();
 
 var locations = {};
 var map;
 
-const button = document.getElementById("chicken-btn");
-button.addEventListener("click", function(event) {
+const button = document.getElementById('chicken-btn');
+button.addEventListener('click', function(event) {
   event.preventDefault();
   start();
 });
@@ -31,18 +31,18 @@ function getUserLocation() {
 }
 
 function init() {
-  const phraseOne = document.getElementById("phrase-one");
-  const phraseTwo = document.getElementById("phrase-two");
-  const buttonLoader = document.getElementById("btn-loader");
+  const phraseOne = document.getElementById('phrase-one');
+  const phraseTwo = document.getElementById('phrase-two');
+  const buttonLoader = document.getElementById('btn-loader');
   setTimeout(function() {
-    phraseOne.classList.add("fade-in");
+    phraseOne.classList.add('fade-in');
   }, 200);
   setTimeout(function() {
-    phraseTwo.classList.add("fade-in");
+    phraseTwo.classList.add('fade-in');
   }, 700);
 
   setTimeout(function() {
-    showElement(buttonLoader, "block");
+    showElement(buttonLoader, 'block');
     getUserLocation()
       .then(position => {
         hideElement(buttonLoader);
@@ -58,8 +58,8 @@ function init() {
   }, 1200);
 
   function showStartButton() {
-    const buttonFader = document.getElementById("btn-fader");
-    buttonFader.classList.add("fade-in");
+    const buttonFader = document.getElementById('btn-fader');
+    buttonFader.classList.add('fade-in');
   }
 }
 
@@ -72,12 +72,12 @@ function init() {
 * -
 */
 function start() {
-  let landingSection = document.getElementById("landing");
-  let loadingSection = document.getElementById("loading");
-  let resultsSection = document.getElementById("results");
+  let landingSection = document.getElementById('landing');
+  let loadingSection = document.getElementById('loading');
+  let resultsSection = document.getElementById('results');
 
   hideElement(landingSection);
-  showElement(loadingSection, "block");
+  showElement(loadingSection, 'block');
 
   let rootGeocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
   let searchTerm = `Popeyes Louisiana Kitchen`;
@@ -90,27 +90,27 @@ function start() {
       // Parse the response and store the features
       let nearbyLocations = JSON.parse(response).features;
       let nearestLocation = findNearest(locations.user.coords, nearbyLocations);
-      let mapContainer = document.getElementById("map");
+      let mapContainer = document.getElementById('map');
 
       // Show the results section before appending the map
       // So mapbox can append properly sized canvas
       hideElement(loadingSection);
-      resultsSection.classList.remove("hidden");
+      resultsSection.classList.remove('hidden');
 
       map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/mapbox/light-v9",
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
         center: locations.user.coords,
         zoom: 14
       });
 
       // create a HTML element for user and location markers
-      var userMarker = document.createElement("div");
-      userMarker.className = "marker";
+      var userMarker = document.createElement('div');
+      userMarker.className = 'm-map__marker';
 
-      var locMarker = document.createElement("div");
-      locMarker.className = "marker";
-      locMarker.classList.add("red");
+      var locMarker = document.createElement('div');
+      locMarker.className = 'm-map__marker';
+      locMarker.classList.add('red');
 
       // make a marker for each feature and add to the map
       new mapboxgl.Marker(userMarker)
@@ -120,21 +120,21 @@ function start() {
         .setLngLat(nearestLocation.geometry.coordinates)
         .addTo(map);
 
-      let resultsPhraseOne = document.getElementById("results-phrase-one");
-      let resultsPhraseTwo = document.getElementById("results-phrase-two");
+      let resultsPhraseOne = document.getElementById('results-phrase-one');
+      let resultsPhraseTwo = document.getElementById('results-phrase-two');
       setTimeout(function() {
-        resultsPhraseOne.classList.add("fade-in");
+        resultsPhraseOne.classList.add('fade-in');
       }, 400);
       setTimeout(function() {
-        resultsPhraseOne.classList.remove("fade-in");
-        resultsPhraseOne.classList.add("fade-out");
-        resultsPhraseTwo.classList.add("fade-in");
+        resultsPhraseOne.classList.remove('fade-in');
+        resultsPhraseOne.classList.add('fade-out');
+        resultsPhraseTwo.classList.add('fade-in');
         flyToLocation(nearestLocation);
         initDirections(nearestLocation);
       }, 2300);
     },
     function(error) {
-      console.error("Failed!", error);
+      console.error('Failed!', error);
     }
   );
 
@@ -150,7 +150,7 @@ function start() {
 
 function initDirections(destination) {
   let rootDirectionsUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/`;
-  let mode = "driving";
+  let mode = 'driving';
   let coordinates = `${locations.user.long}%2C${locations.user
     .lat}%3B${destination.geometry.coordinates[0]}%2C${destination.geometry
     .coordinates[1]}`;
@@ -162,16 +162,16 @@ function initDirections(destination) {
 }
 
 function renderDirections(data) {
-  const directionsSection = document.getElementById("directions");
-  const directionsList = document.getElementById("directions-list");
+  const directionsSection = document.getElementById('directions');
+  const directionsList = document.getElementById('directions-list');
 
   // Convert the distance and time to miles and minutes
   let distance = metersToFixedMiles(data.routes[0].distance);
   let time = secondsToRoundedMinutes(data.routes[0].duration);
 
   // Build a header for the directions
-  let directionsHeader = document.createElement("div");
-  directionsHeader.className = "m-directions__header";
+  let directionsHeader = document.createElement('div');
+  directionsHeader.className = 'm-directions__header';
   directionsHeader.innerHTML = `<p>You're ${distance} miles and about ${time} minutes away.</p><p>Hang in there.</p>`;
 
   // Build the directions list
@@ -184,13 +184,13 @@ function renderDirections(data) {
         directions[i].distance
       )} mi</span>
     `;
-    let item = document.createElement("li");
-    item.className = "m-directions__item";
+    let item = document.createElement('li');
+    item.className = 'm-directions__item';
     item.innerHTML = template;
     directionsList.appendChild(item);
     directionsSection.insertBefore(directionsHeader, directionsList);
 
-    directionsSection.classList.add("fade-in");
+    directionsSection.classList.add('fade-in');
   }
 }
 
@@ -205,8 +205,8 @@ function findNearest(userLocation, searchLocations) {
   searchLocations.forEach(function(result) {
     // Add a distance property to each result
     // that contains the distance from the user browser location
-    Object.defineProperty(result.properties, "distance", {
-      value: turfDistance(locations.user.coords, result.geometry, "miles"),
+    Object.defineProperty(result.properties, 'distance', {
+      value: turfDistance(locations.user.coords, result.geometry, 'miles'),
       writable: true,
       enumerable: true,
       configurable: true

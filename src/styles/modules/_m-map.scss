@@ -1,0 +1,26 @@
+$m: '.m-map';
+
+#{$m} {
+  height: 400px;
+  width: 400px;
+  border: 1px solid #eee;
+  text-align: left;
+  @media (max-width: 850px) {
+    margin: 0 auto;
+  }
+  @media (max-width: 400px) {
+    width: 350px;
+  }
+}
+
+#{$m}__marker {
+  background: #000;
+  width: 20px;
+  border-radius: 50%;
+  height: 20px;
+  opacity: 0.7;
+  &.red {
+    background: #a1162d;
+    border: 3px solid #fff;
+  }
+}

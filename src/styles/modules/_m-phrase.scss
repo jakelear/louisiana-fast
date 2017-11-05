@@ -1,0 +1,27 @@
+$m: '.m-phrase';
+
+#{$m} {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
+
+#{$m}--results {
+  color: #888;
+  width: 30%;
+  margin: 0 2rem;
+  text-align: left;
+  @media (max-width: 850px) {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+  }
+  &.align-right {
+    text-align: right;
+    @media (max-width: 850px) {
+      text-align: center;
+    }
+  }
+  span {
+    color: #333;
+  }
+}

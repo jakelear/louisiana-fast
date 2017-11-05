@@ -1,0 +1,28 @@
+$m: '.m-section';
+
+#{$m} {
+  align-items: start;
+  width: 100%;
+  text-align: center;
+  &.hidden {
+    display: none;
+  }
+}
+
+#{$m}--landing {
+  margin: 8rem 0 0;
+}
+
+#{$m}--results {
+  display: flex;
+  justify-content: center;
+  margin: 8rem 0 0;
+  @media (max-width: 850px) {
+    display: block;
+  }
+}
+
+#{$m}--directions {
+  opacity: 0;
+  transition: opacity 2s linear;
+}

@@ -1,0 +1,24 @@
+$m: '.m-header';
+
+#{$m} {
+  color: #f6f6f6;
+  font-size: 10rem;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  top: -2rem;
+  width: 100%;
+  z-index: 0;
+  @media (max-width: 1575px) {
+    font-size: 6rem;
+    top: -1rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 4rem;
+  }
+  @media (max-width: 400px) {
+    font-size: 3.3rem;
+  }
+}
