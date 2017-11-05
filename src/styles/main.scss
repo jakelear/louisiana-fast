@@ -64,7 +64,7 @@ body {
     margin: 0 auto;
   }
   @media (max-width: 400px) {
-    width: 375px;
+    width: 350px;
   }
 }
 
@@ -176,6 +176,7 @@ button {
   outline: 0;
   position: relative;
   text-transform: uppercase;
+  text-align: center;
   vertical-align: middle;
   width: 7rem;
   -webkit-backface-visibility: hidden;
