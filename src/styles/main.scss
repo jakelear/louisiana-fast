@@ -2,6 +2,8 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  width: 100%;
 }
 
 /*
@@ -61,6 +63,9 @@ body {
   @media (max-width: 850px) {
     margin: 0 auto;
   }
+  @media (max-width: 400px) {
+    width: 375px;
+  }
 }
 
 .marker {
@@ -83,7 +88,6 @@ body {
   padding: 0;
   position: absolute;
   text-align: center;
-  width: 100%;
   top: -2rem;
   z-index: 0;
   @media (max-width: 1575px) {
@@ -92,6 +96,9 @@ body {
   }
   @media (max-width: 600px) {
     font-size: 4rem;
+  }
+  @media (max-width: 400px) {
+    font-size: 3.5rem;
   }
 }
 
